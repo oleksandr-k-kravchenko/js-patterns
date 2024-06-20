@@ -1,7 +1,8 @@
 import benchmark from "benchmark";
 import insertionSort from "./sorting_insertion.js";
 import mergeSort from "./sorting_merge.js";
-import { generate, generateReverse } from "../array_helpers.js";
+import quickSort from "./sorting_quick.js";
+import {generate, generateReverse, printArray} from "../array_helpers.js";
 
 function sortReverse(n, fn) {
   fn(generateReverse(n));
@@ -27,6 +28,12 @@ suite
   })
   .add('merge sort - reverse', function () {
     sortReverse(N, mergeSort);
+  })
+  .add('quick sort - random', function () {
+    sort(randomOrderingArray, quickSort);
+  })
+  .add('quick sort - reverse', function () {
+    sortReverse(N, quickSort);
   })
   .on('cycle', function (event) {
     console.log(String(event.target));
